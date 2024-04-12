@@ -14,7 +14,6 @@ public class VehicleDaoImplTest {
 
     private VehicleDaoImpl vehicleDao;
 
-
     @BeforeEach
     public void setUp() {
         vehicleDao = new VehicleDaoImpl();
