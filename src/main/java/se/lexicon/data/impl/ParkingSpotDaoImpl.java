@@ -57,21 +57,30 @@ import java.util.Optional;
 
     @Override
     public void occupyParkingSpot(int spotNumber) {
-        for(ParkingSpot parkingSpot: storage) {
-        if(parkingSpot.getSpotNumber()==spotNumber) {
+        Optional<ParkingSpot> parkingSpotOptional=find(spotNumber);
+        if(parkingSpotOptional.isPresent()){
+            ParkingSpot parkingSpot = parkingSpotOptional.get();
             parkingSpot.isOccupied();
         }
-        }
+        /*for(ParkingSpot parkingSpot: storage) {
+        if(parkingSpot.getSpotNumber()==spotNumber) {
+            parkingSpot.isOccupied();}*/
+
         throw new IllegalArgumentException("spotnumber is not found");
     }
 
     @Override
     public void vacateParkingSpot(int spotNumber) {
-        for(ParkingSpot parkingSpot: storage){
+        Optional<ParkingSpot> parkingSpotOptional=find(spotNumber);
+        if(parkingSpotOptional.isPresent()){
+            ParkingSpot parkingSpot = parkingSpotOptional.get();
+            parkingSpot.vacate();
+        }
+        /*for(ParkingSpot parkingSpot: storage){
             if(parkingSpot.getSpotNumber()==spotNumber){
                 parkingSpot.vacate();
-            }
-        }
+            }*/
+
         throw new IllegalArgumentException("spotnumber is not found");
     }
 

@@ -36,7 +36,6 @@ public class ReservationDaoImpl implements ReservationDao {
             return false;
         }
         storage.remove(reservationOptional.get());
-
         return true;
     }
 
@@ -45,7 +44,6 @@ public class ReservationDaoImpl implements ReservationDao {
         for (Reservation reservation : storage) {
             if (reservation.getCustomer().getId() == customerId) {
                 return reservation;
-
             }
         }
         throw new IllegalArgumentException("Resevation with this customerid not found");
@@ -53,9 +51,11 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public Reservation findByVehicleLicensePlate(String licensePlate) {
-        Optional<Reservation> reservationOptional = find(licensePlate);
-        if (reservationOptional.isPresent())
-            return reservationOptional.get();
+        for (Reservation reservation : storage) {
+            if (reservation.getAssociatedVehicle().getLicensePlate() == licensePlate) {
+                return reservation;
+            }
+        }
         throw new IllegalArgumentException("Reservation with this vehicle licence plate is not found");
     }
 

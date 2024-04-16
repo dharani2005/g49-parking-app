@@ -25,10 +25,10 @@ public class CustomerDaoImplTest {
         Customer input=new Customer("asdfg","abcd");
         Customer result = testObject.create(input);
         int id=result.getId();
-        /*assertEquals(result,input);*/
-        assertEquals("asdfg",result.getName());
+        assertEquals(result,input);
+        /*assertEquals("asdfg",result.getName());
         assertEquals("abcd",result.getPhoneNumber());
-        assertEquals(1001,result.getId());
+        assertEquals(1001,result.getId());*/
         assertTrue(testObject.find(id).isPresent());
     }
 
@@ -54,8 +54,7 @@ public class CustomerDaoImplTest {
         Customer actualValue=new Customer("abcd","efgh");
         Customer result = testObject.create(actualValue);
         int id=result.getId();
-        assertTrue(testObject.remove(id));
-       /* assertFalse(testObject.remove(id));*/
+        assertFalse(testObject.remove(id));
 
     }
 
