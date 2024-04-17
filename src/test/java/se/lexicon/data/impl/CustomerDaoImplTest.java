@@ -2,6 +2,13 @@ package se.lexicon.data.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.lexicon.model.Customer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerDaoImplTest {
 
@@ -9,47 +16,71 @@ public class CustomerDaoImplTest {
 
     @BeforeEach
     public void setUp() {
+
         testObject = new CustomerDaoImpl();
     }
 
     @Test
     public void testCreateCustomer() {
-        //todo: Implement JUnit test
+        Customer input=new Customer("asdfg","abcd");
+        Customer result = testObject.create(input);
+        int id=result.getId();
+        assertEquals(result,input);
+        /*assertEquals("asdfg",result.getName());
+        assertEquals("abcd",result.getPhoneNumber());
+        assertEquals(1001,result.getId());*/
+        assertTrue(testObject.find(id).isPresent());
     }
 
     @Test
-    public void findById() {
-        //todo: Implement JUnit test
+    public void testfindById() {
+        Customer input=new Customer("asdfg","abcd");
+        Customer result = testObject.create(input);
+        int id=result.getId();
+        assertTrue(testObject.find(id).isPresent());
 
     }
 
     @Test
     public void testNonExistentCustomer() {
-        //todo: Implement JUnit test
+        assertFalse(testObject.find(1).isPresent());
+       /* boolean test=!testObject.find(1).isPresent();
+        assertTrue(test);*/
 
     }
 
     @Test
     public void testRemoveCustomer() {
-        //todo: Implement JUnit test
+        Customer actualValue=new Customer("abcd","efgh");
+        Customer result = testObject.create(actualValue);
+        int id=result.getId();
+        assertFalse(testObject.remove(id));
 
     }
 
     @Test
     public void testRemoveNonExistentCustomer() {
-        //todo: Implement JUnit test
+        Customer actualValue=new Customer("sdfg","12345");
+        Customer result = testObject.create(actualValue);
+        int id=result.getId();
+        boolean removed = testObject.remove(id);
+        assertFalse(removed);
 
     }
 
     @Test
     public void testFindAllCustomers() {
-        //todo: Implement JUnit test
+        Customer customer=new Customer("sdfg","12345");
+        Customer result=testObject.create(customer);
+       List<Customer> customers= testObject.findAll();
+       assertEquals(1,customers.size());
 
     }
 
     @Test
     public void testFindAllCustomersEmptyList() {
-        //todo: Implement JUnit test
+        List<Customer> customers =testObject.findAll();
+        assertEquals(0,customers.size());
 
     }
 

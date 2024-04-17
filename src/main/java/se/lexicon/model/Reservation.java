@@ -16,6 +16,14 @@ public class Reservation {
         this.startTime = LocalDateTime.now();
         setEndTime(hours);
         this.associatedVehicle = associatedVehicle;
+
+    }
+
+    public Reservation(String id, Customer customer, ParkingSpot parkingSpot, Vehicle associatedVehicle) {
+        this.id = id;
+        this.customer = customer;
+        this.parkingSpot = parkingSpot;
+        this.associatedVehicle = associatedVehicle;
     }
 
     public String getId() {

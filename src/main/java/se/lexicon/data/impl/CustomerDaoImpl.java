@@ -14,9 +14,11 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer create(Customer customer) {
-        //todo: Add necessary validations
         int id = CustomerSequencer.nextId();
         customer.setId(id);
+        if(customer == null)throw new IllegalArgumentException("customer shuldnot be null");
+        Optional<Customer> customerOptional =find(customer.getId());
+        if(customerOptional.isPresent())throw new IllegalArgumentException("This customer already exists");
         storage.add(customer);
         return customer;
     }
@@ -34,9 +36,11 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean remove(int id) {
         Optional<Customer> customerOptional = find(id);
-        if (!customerOptional.isPresent()) return false;
+        if (customerOptional.isPresent())
+        {
         storage.remove(customerOptional.get());
-        return true;
+        }
+        return false;
     }
 
     @Override
